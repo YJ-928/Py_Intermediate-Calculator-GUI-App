@@ -1,5 +1,5 @@
 from tkinter import *
-# ---------------------------------------- CONSTANTS --------------------------------- #
+# ----------------------------------------- CONSTANTS ----------------------------------- #
 index = 0
 expression = ""
 DISPLAY_FONT = ("Airel", 24)
@@ -41,7 +41,7 @@ def back_func():
 
 def divide_func():
     """Inserts Divide sign"""
-    global index,what_to_calc,expression
+    global index,expression
     display.insert(index,"/")
     expression += "/"
     index += 1
@@ -157,6 +157,16 @@ def insert_zero():
     expression += "0"
     index += 1
 
+
+def key_pressed(event):
+   """Displaying The Keyboard key that was pressed by the user"""
+   global index,expression
+   display.insert(index, event.char)
+   index += 1
+   expression += event.char
+
+
+
 # ------------------------ UI SETUP FOR CALCULATOR --------------------- #
 window = Tk()
 window.title("Simple Calculator By YJ-928")
@@ -237,7 +247,7 @@ equal.grid(row=12, column=3)
 
 # blanks between number lines for spacing
 # between row-0 & row-2
-blank = Label(fg="Black",bg="Black",highlightthickness=0,font=("Airel",15))
+blank = Label(fg="Black", bg="Black", highlightthickness=0, font=("Airel",15))
 blank.grid(row=1,column=0,columnspan=4)
 # between row-2 & row-4
 blank = Label(fg="Black", bg="Black", highlightthickness=0, font=("Airel", 15))
@@ -255,5 +265,7 @@ blank.grid(row=9, column=0, columnspan=4)
 blank = Label(fg="Black", bg="Black", highlightthickness=0, font=("Airel", 15))
 blank.grid(row=11, column=0, columnspan=4)
 
+# Inserting Keyboard key presses into display
+window.bind("<Key>", key_pressed)
 
 window.mainloop()
